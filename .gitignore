@@ -1,0 +1,7 @@
+# exclude .settings and bin directory inside all projects as well as files .classpath #and .project
+#
+bin/
+*.classpath
+*.project
+.settings/
+target/
