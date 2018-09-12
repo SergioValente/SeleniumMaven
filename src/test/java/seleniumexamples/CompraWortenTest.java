@@ -88,10 +88,10 @@ public class CompraWortenTest {
 		
 		productDescription = driver.findElement(By.xpath("//*[@id=\"undefined\"]/div/div/section/div/section[2]/div/div/div[1]/span")).getText();
 		productPriceCurrent = driver.findElement(By.cssSelector("span.w-product__price__current")).getAttribute("content").replaceAll(",", ".");	
-
-		WebElement element = driver.findElement(By.xpath("//*[@id=\"undefined\"]/div/div/section/div/section[2]/div/div/div[2]/div[1]/div[3]/div[2]/button/div[2]"));
 		
-		assertEquals("Entrega estimada em 1 a 2 dias úteis", element.getText());
+		WebElement element = driver.findElement(By.cssSelector("button.w-button-primary.qa-product-options__add-cart-linkto.w-checkout-button"));
+		
+		assertEquals("ADICIONAR AO CARRINHO", element.getText());
 	}
 	
 	@Test
@@ -135,6 +135,17 @@ public class CompraWortenTest {
 		quantityAfterClick = Integer.parseInt(quantityShoppingCart.getText());
 		
 		assertEquals(quantityBeforeClick, quantityAfterClick);
+	}
+	
+	@Test
+	public void stage06_testDeleteProductFromShoppingCart() throws Exception {
+		
+		driver.findElement(By.cssSelector("div.checkout-product__delete-product:nth-child(7) > a:nth-child(1) > i:nth-child(1)")).click();
+		Thread.sleep(3000);
+		String expectedCartMessage = "O seu carrinho está vazio de momento.";
+		String emptyCartMessage = driver.findElement(By.xpath("//*[@id=\"undefined\"]/div/div/div/p")).getText();
+		
+		assertEquals(expectedCartMessage, emptyCartMessage);
 	}
 	
 	private void scrollDown() {
