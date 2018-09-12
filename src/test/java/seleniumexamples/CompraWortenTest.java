@@ -49,7 +49,7 @@ public class CompraWortenTest {
 	public static void tearDownAfterClass() throws Exception {
 		
 		System.out.println("All tests Runned.");		
-		//driver.quit();
+		driver.quit();
 	}
 
 	@Test
