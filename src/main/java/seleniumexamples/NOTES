@@ -4,3 +4,5 @@
 - Had to include maven surefire plugin to the pom to be able to run "mvn test" from the command line!!!
 
 - How to force JUnit to run tests in a particular order!?!?!? (see https://stackoverflow.com/questions/3693626/how-to-run-test-methods-in-specific-order-in-junit4)
+
+- Explicit waits!!!!
