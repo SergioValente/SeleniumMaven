@@ -43,7 +43,6 @@ public class CompraWortenTest {
 
 		driver = new ChromeDriver(options);
 		driver.manage().deleteAllCookies();
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
 
@@ -56,20 +55,23 @@ public class CompraWortenTest {
 
 	@Test
 	public void stage01_testLogin() throws Exception {
+
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+
 		driver.get("http://www.worten.pt");
 		System.out.println("Test1");
 		assertEquals("Worten Online | Tudo o que precisa em Worten.pt - 24H", driver.getTitle());
 
-		driver.findElement(By.linkText("INICIAR SESSÃO")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("INICIAR SESSÃO"))).click();
+
 		driver.findElement(By.cssSelector("input#email")).sendKeys("sergio134@sapo.pt");
 		driver.findElement(By.cssSelector("input#pass")).sendKeys("wortenNotFree");
 		driver.findElement(By.xpath("//*[@id=\"accountLogin\"]/div/div/div/div[1]/form/div[2]/div/button")).click();
-		
-		WebDriverWait wait = new WebDriverWait(driver, 20);
+
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("button.dropbtn_login_menu")));
 		driver.navigate().back();
 		Thread.sleep(1000);
-		
+
 		assertEquals("https://www.worten.pt/cliente/conta#/myDashboard", driver.getCurrentUrl());
 		assertEquals("Área de Cliente | Início de Sessão como Cliente | Worten.pt", driver.getTitle());
 	}
@@ -98,10 +100,10 @@ public class CompraWortenTest {
 				.getText();
 		productPriceCurrent = driver.findElement(By.cssSelector("span.w-product__price__current"))
 				.getAttribute("content").replaceAll(",", ".");
-		
-		//Thread.sleep(10000);
+
+		// Thread.sleep(10000);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		WebElement element =  wait.until(ExpectedConditions.visibilityOfElementLocated(
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.cssSelector("button.w-button-primary.qa-product-options__add-cart-linkto.w-checkout-button")));
 
 		assertEquals("ADICIONAR AO CARRINHO", element.getText());
@@ -111,16 +113,17 @@ public class CompraWortenTest {
 	public void stage04_testBuyPromotion() throws Exception {
 		System.out.println("Test4");
 
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+
 		// Click on "ADICIONAR AO CARRINHO"
-		driver.findElement(
-				By.cssSelector("button.w-button-primary.qa-product-options__add-cart-linkto.w-checkout-button"))
+		wait.until(ExpectedConditions.presenceOfElementLocated(
+				By.cssSelector("button.w-button-primary.qa-product-options__add-cart-linkto.w-checkout-button")))
 				.click();
 
 		// Click on shopping cart symbol
-		driver.findElement(By.cssSelector("a.w-shop-cart-icon-mobile.qa-header__shop-cart.cart-has-products")).click();
-		
-		//Wait for description of product in the shopping cart to be available
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a.w-shop-cart-icon-mobile.qa-header__shop-cart.cart-has-products"))).click();
+
+		// Wait for description of product in the shopping cart to be available
 		WebElement productDescriptionElementShoppingCart = wait.until(ExpectedConditions
 				.presenceOfElementLocated(By.cssSelector(".checkout-product__title-name > a:nth-child(1)")));
 
@@ -128,7 +131,7 @@ public class CompraWortenTest {
 
 		WebElement productPriceElementShoppingCart = driver
 				.findElement(By.xpath("//*[@id=\"undefined\"]/div/div/div/div[2]/div[5]/span[2]/input"));
-		
+
 		String productPriceShoppingCart = productPriceElementShoppingCart.getAttribute("value");
 
 		assertEquals("Carrinho de Compras | Worten.pt", driver.getTitle());
@@ -173,7 +176,7 @@ public class CompraWortenTest {
 
 		driver.findElement(
 				By.cssSelector("div.checkout-product__delete-product:nth-child(6) > a:nth-child(1) > i:nth-child(1)"))
-				.click(); 
+				.click();
 		Thread.sleep(3000);
 		String expectedCartMessage = "O seu carrinho está vazio de momento.";
 		String emptyCartMessage = driver.findElement(By.xpath("//*[@id=\"undefined\"]/div/div/div/p")).getText();
