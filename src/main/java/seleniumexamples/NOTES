@@ -7,4 +7,12 @@
 
 - Explicit waits!!!!
 
-- To work with grid, had to put gecko and chromedriver in the same folder as the selenium standalone server!!!
+- Selenium GRID: https://www.tutorialspoint.com/selenium/selenium_grids.htm
+				 https://github.com/SeleniumHQ/selenium/wiki/Grid2
+				 https://www.guru99.com/introduction-to-selenium-grid.html
+
+- To work with grid, had to put gecko and chromedriver in the same folder as the selenium standalone server!!! 
+	To instantiate GRID hub, do:
+							- java -jar selenium-server-standalone-<version>.jar -port 4444 -role hub
+	To instantiate GRID node, do: 
+							- java -jar selenium-server-standalone-<version>.jar -role node -hub (http://192.168.3.103:4444/grid/register)
