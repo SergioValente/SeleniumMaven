@@ -6,3 +6,5 @@
 - How to force JUnit to run tests in a particular order!?!?!? (see https://stackoverflow.com/questions/3693626/how-to-run-test-methods-in-specific-order-in-junit4)
 
 - Explicit waits!!!!
+
+- To work with grid, had to put gecko and chromedriver in the same folder as the selenium standalone server!!!
