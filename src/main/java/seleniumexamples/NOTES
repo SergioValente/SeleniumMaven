@@ -16,3 +16,7 @@
 							- java -jar selenium-server-standalone-<version>.jar -port 4444 -role hub
 	To instantiate GRID node, do: 
 							- java -jar selenium-server-standalone-<version>.jar -role node -hub (http://192.168.3.103:4444/grid/register)
+	After instantiating node, to register a browser, do:
+							- java -jar selenium-server-standalone-<version>.jar \
+    							-role node -hub (http://http://192.168.3.103:4444/grid/register) \
+   								-Dwebdriver.chrome.driver=.\<pathToChromeDriver>
