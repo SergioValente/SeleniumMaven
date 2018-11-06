@@ -10,6 +10,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,7 +24,7 @@ import org.testng.annotations.Test;
 public class GRID_CompraWortenTestNG {
 	public WebDriver driver;
 	public String URL, Node;
-	protected ThreadLocal<RemoteWebDriver> threadDriver = null;
+	//protected ThreadLocal<RemoteWebDriver> threadDriver = null;
 	
 	JavascriptExecutor jse;
 
@@ -34,11 +36,11 @@ public class GRID_CompraWortenTestNG {
 	public void launchapp(String browser) throws MalformedURLException {
 		String URL = "http://www.worten.pt";
 
-//	      System.setProperty("webdriver.chrome.driver",
-//					"C:\\Users\\sergio.valente\\eclipse-workspace\\SeleniumExample\\drivers\\chromedriver.exe");
-//	      
-//	      System.setProperty("webdriver.firefox.driver",
-//					"C:\\Users\\sergio.valente\\eclipse-workspace\\SeleniumExample\\drivers\\geckodriver.exe");
+	      System.setProperty("webdriver.chrome.driver",
+					"C:\\Users\\sergio.valente\\eclipse-workspace\\SeleniumExample\\drivers\\chromedriver.exe");
+	      
+	      System.setProperty("webdriver.firefox.driver",
+					"C:\\Users\\sergio.valente\\eclipse-workspace\\SeleniumExample\\drivers\\geckodriver.exe");
 
 		if (browser.equalsIgnoreCase("firefox")) {
 			System.out.println(" Executing on FireFox");
@@ -46,7 +48,7 @@ public class GRID_CompraWortenTestNG {
 			DesiredCapabilities cap = DesiredCapabilities.firefox();
 			cap.setBrowserName("firefox");
 
-			driver = new RemoteWebDriver(new URL(Node), cap);
+			driver = new FirefoxDriver();//RemoteWebDriver(new URL(Node), cap);
 			// Puts an Implicit wait, Will wait for 10 seconds before throwing exception
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -58,7 +60,7 @@ public class GRID_CompraWortenTestNG {
 			DesiredCapabilities cap = DesiredCapabilities.chrome();
 			cap.setBrowserName("chrome");
 			String Node = "http://localhost:4444/wd/hub";
-			driver = new RemoteWebDriver(new URL(Node), cap);
+			driver = new ChromeDriver();//RemoteWebDriver(new URL(Node), cap);
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 			// Launch website

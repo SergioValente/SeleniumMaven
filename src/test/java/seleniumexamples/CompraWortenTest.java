@@ -2,6 +2,8 @@ package seleniumexamples;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
@@ -17,7 +19,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Ignore;
 
+@Ignore
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CompraWortenTest {
 
@@ -39,8 +43,8 @@ public class CompraWortenTest {
 		options.addArguments("incognito");
 		options.addArguments("enable-strict-powerful-feature-restrictions");
 		options.addArguments("disable-geolocation");
-		options.addArguments("disable-notifications");
-
+		//options.addArguments("disable-notifications");
+		
 		driver = new ChromeDriver(options);
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -57,15 +61,15 @@ public class CompraWortenTest {
 	public void stage01_testLogin() throws Exception {
 
 		WebDriverWait wait = new WebDriverWait(driver, 20);
-
+		
 		driver.get("http://www.worten.pt");
 		System.out.println("Test1");
 		assertEquals("Worten Online | Tudo o que precisa em Worten.pt - 24H", driver.getTitle());
-
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("INICIAR SESSÃO"))).click();
-
-		driver.findElement(By.cssSelector("input#email")).sendKeys("sergio134@sapo.pt");
-		driver.findElement(By.cssSelector("input#pass")).sendKeys("wortenNotFree");
+ 		
+		//wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("INICIAR SESSÃO"))).click();
+		
+		//driver.findElement(By.cssSelector("input#email")).sendKeys("sergio134@sapo.pt");
+		//driver.findElement(By.cssSelector("input#pass")).sendKeys("wortenNotFree");
 		driver.findElement(By.xpath("//*[@id=\"accountLogin\"]/div/div/div/div[1]/form/div[2]/div/button")).click();
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("button.dropbtn_login_menu")));
